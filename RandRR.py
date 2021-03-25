@@ -42,7 +42,6 @@ while finished == False:
     while j in range(len(que)): 
         # if service time >= quantum
         if que[j][2] >= quantum:
-            print(que, " ", compleated_time, " >= ")
             compleated_time += quantum
             que[j][2] -= quantum
             if que[j][2] == 0:
@@ -54,9 +53,8 @@ while finished == False:
             if len(que) > 0:
                 compleated_time += context_switch
 
-        # if service time is less than quantum and greater than 0
+        # if service time is less than quantum
         elif que[j][2] < quantum:
-            print(que, " ", compleated_time, " x ")
             compleated_time += que[j][2]
             que[j][2] = 0
             end_time.append([que[j][0], compleated_time])
@@ -64,15 +62,15 @@ while finished == False:
             if len(que) > 0:
                 compleated_time += context_switch
             que.pop(j)
-            print(que, " ", compleated_time, " x ")
             j -= 1
 
+        #print(que, " ", compleated_time)
         j +=1       
 
     # if que is empty +1 compleated time (clock)
     if not que:
         compleated_time += 1
-        print(compleated_time)
+        #print(compleated_time)
     
     # when all process have ended stop loop
     if(len(end_time) == itterations):
@@ -85,14 +83,15 @@ total_wait_time = c.calc_total_wait_time(ids, start_time, end_time)
 average_turnaround_time = c.calc_average_time(turnaround_time)
 average_total_wait_time = c.calc_average_time(total_wait_time)
 
-print("ID's                    : ", ids)
-print("Arrival Times           : ", arrival_times)
-print("Service Times           : ", service_times)
-print("Start Times             : ", start_time)
-print("End Times               : ", end_time)
-print("Initial Wait            : ", initial_wait_time)
-print("Total Wait Time         : ", total_wait_time)
-print("TurnAround Time         : ", turnaround_time)
+
+print(" ")
+print("ID    Start    End       Initial Wait    Total Wait    Turn Around")
+for id in range(len(ids)):
+    for index in ids:
+        if id == index:
+            print("---------------------------------------------------------------------------------------------------------------------------------")
+            print(ids[id], "   ", start_time[id][1], "      ", end_time[id][1], "        ", initial_wait_time[id][1], "             ", total_wait_time[id][1], "            ", turnaround_time[id][1])
+
+print("")
 print("average_total_wait_time : ", average_total_wait_time)
 print("Avg turnaround Time     : ", average_turnaround_time)
-
