@@ -22,7 +22,7 @@ def gen_service_times(itterations):
     rand_service_times = []
 
     for i in range(itterations):
-        service_time = random.randrange(2, 6, 1)
+        service_time = random.randrange(4,9,1)
         rand_service_times.append(service_time)
     
     return rand_service_times
