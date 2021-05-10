@@ -1,13 +1,12 @@
-import GenRandTimes as a 
 import Calculations as c
 
-itterations = int(input("Itterations: "))
-quantum = int(input("Quantum: "))
-context_switch = int(input("Context Switch: "))
+itterations = 10
+quantum = 3
+context_switch = 1
 
-ids = a.gen_ids(itterations)
-arrival_times = a.gen_arrival_times(itterations)
-service_times = a.gen_service_times(itterations)
+ids = [0,1,2,3,4,5,6,7,8,9]
+arrival_times = [1, 5, 7, 10, 20, 15, 15, 30, 31, 32] 
+service_times = [1, 3, 5, 7, 4, 5, 3, 1, 1, 7]
 service_times_remaining = service_times.copy()
 que = []
 
@@ -52,9 +51,13 @@ while finished == False:
                     first_to_finish = que[j][0]
                 que.pop(j)
                 j -= 1
-                
+            
             if len(que) > 0:
                 compleated_time += context_switch
+                # if task can be finished in next turn then go back and finish it
+                if que[j][2] <= quantum:
+                    j-= 1
+            
 
         # if service time is less than quantum
         elif que[j][2] < quantum:
@@ -99,3 +102,4 @@ print("Last Job to Finish: ", last_to_finish)
 print("average_total_wait_time : ", average_total_wait_time)
 print("Avg turnaround Time     : ", average_turnaround_time)
 print("Avg service time: ", average_service_time)
+

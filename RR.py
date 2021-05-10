@@ -1,13 +1,12 @@
-import GenRandTimes as a 
 import Calculations as c
 
-itterations = int(input("Itterations: "))
-quantum = int(input("Quantum: "))
-context_switch = int(input("Context Switch: "))
+itterations = 10 
+quantum = 3 
+context_switch = 1 
 
-ids = a.gen_ids(itterations)
-arrival_times = a.gen_arrival_times(itterations)
-service_times = a.gen_service_times(itterations)
+ids = [0,1,2,3,4,5,6,7,8,9] 
+arrival_times = [1, 5, 7, 10, 20, 15, 15, 30, 31, 32] 
+service_times = [1, 3, 5, 7, 4, 5, 3, 1, 1, 7]
 service_times_remaining = service_times.copy()
 que = []
 
